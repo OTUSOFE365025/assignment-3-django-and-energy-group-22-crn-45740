@@ -9,7 +9,7 @@ Although Django is primarily a web framework, this assignment demonstrates how i
 
 The goal is to replicate the same functionality as the previous assignment but now using Django’s ORM for data storage and retrieval.
 
-=========================================================================================
+
 
 ## Objectives
 The following two aspects are implemented using the Django ORM framework:
@@ -17,7 +17,6 @@ The following two aspects are implemented using the Django ORM framework:
 1. Database Population: Populating the database with product UPC codes, names, and prices.  
 2. Product Scanning: Scanning a product (via user input) and displaying its name and price if found in the database.
 
-=========================================================================================
 
 ## Project Structure
 - .github → GitHub Classroom files  
@@ -32,7 +31,7 @@ The following two aspects are implemented using the Django ORM framework:
 - settings.py → Django ORM configuration (SQLite setup)  
 - README.md → Project documentation  
 
-======================================================================================
+
 
 ## Features Implemented
 
@@ -51,7 +50,7 @@ The following two aspects are implemented using the Django ORM framework:
    - If not found, a message such as “Product not found” appears.
 
 
-==============================================================================
+
 
 ## Setup Instructions
 
@@ -67,11 +66,13 @@ tkinter
 2. Simply run the program:
    python main.py
 
+
 Expected behavior:
 
 Uses the pre-populated database of sample products.
 Allows scanning of products by UPC.
 Displays the product name and price if found.
+
 
 Use the following sample data for testing:
 | UPC Code     | Product Name      | Price ($) |
