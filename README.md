@@ -1,101 +1,103 @@
-Django ORM Standalone
-=====================
+# Cash Register Application (Django ORM)
+Aadit Singla: 100906986
+Pratham Patel: 100920625
+Joao Pedro Minari Prates: 100903075
 
-![Django](https://img.shields.io/badge/Django_ORM-Standalone-blue)
-![Python](https://img.shields.io/badge/Python-yellow)
+## Overview
+This project implements a standalone version of the Cash Register Application using the Django Object Relational Mapper (ORM).  
+Although Django is primarily a web framework, this assignment demonstrates how its ORM can be used without running a web server, allowing database functionality inside a local Python application.
 
-Use the database components of Django without having to use the rest of Django (i.e. running a web server)! :tada: A typical use case for using this template would be if you are writing a python script and you would like the database functionality provided by Django, but have no need for the request/response functionalty of a client/server web application that Django also provides. 
+The goal is to replicate the same functionality as the previous assignment but now using Django’s ORM for data storage and retrieval.
 
-With this project template you can write regular python scripts and use Django's excellent ORM functionality with the database backend of your choice. This makes it convienient for Djangonauts to write database driven python applications with the familiar and well polished Django ORM. Enjoy.
 
-:gear: Requirements
--------------------
-- Last tested successfully with Python 3.10.4 and Django 5.0.6
-- Create venv and pip install django to import the required modules.
 
-:open_file_folder: File Structure
----------------------------------
-```
-django-orm/
-├── db/
-│   ├── __init__.py
-│   └── models.py
-├── main.py
-├── manage.py
-├── README.md
-└── settings.py
-```
+## Objectives
+The following two aspects are implemented using the Django ORM framework:
 
-__The main.py file is the entry point for the project, and where you start your code. You automatically get access to your models via ```from db.models import *```
-Think of it like a plain old python file, but now with the addition of Django's feature-rich models.__ :smiling_face_with_three_hearts:
+1. Database Population: Populating the database with product UPC codes, names, and prices.  
+2. Product Scanning: Scanning a product (via user input) and displaying its name and price if found in the database.
 
-__The db/models.py is where you configure your typical Django models.__ There is a toy user model included as a simple example. After running the migrations command in the quick setup below, a db.sqlite3 file will be generated. The settings.py file is where can swap out the sqlite3 database for another database connection, such as Postgres or AmazonRDS, if you wish. For most applications, sqlite3 will be powerful enough. But if you need to swap databases down the road, you can easily do so, which is one of the benefits of using the Django ORM. 
 
-:rocket: Quick Setup
---------------------
-Create a folder for your project on your local machine
-```
-mkdir myproject; cd myproject
-```
-Create a virtual environment and install django
-```
-python -m venv venv; source venv/bin/activate; pip install django
-```
-Download this project template from GitHub
-```
-git clone git@github.com:dancaron/Django-ORM.git; cd Django-ORM
-```
-Initialize the database
-```
-python manage.py makemigrations db; python manage.py migrate
-```
-Run the project
-```
-python main.py
-```
+## Project Structure
+- .github → GitHub Classroom files  
+- db/ → Contains ORM model and migrations  
+  - models.py → Defines Product model (upc, name, price)  
+  - __init__.py → Marks db as a Python package  
+  - migrations/ → Auto-generated Django migration files  
+- .gitignore → Files to ignore in version control  
+- db.sqlite3 → SQLite database file (already contains sample data and schema)  
+- main.py → Main script (populates DB and scans products)  
+- manage.py → Default Django management file  
+- settings.py → Django ORM configuration (SQLite setup)  
+- README.md → Project documentation  
 
-Feel free to send pull requests if you want to improve this project.
 
-:crystal_ball: Example
-----------------------
-After running Quick Start above: 
 
-Code in db/models.py:
-```
-# Sample User model
-class User(models.Model):
-    name = models.CharField(max_length=50, default='Dan')
+## Features Implemented
 
-    def __str__(self):
-        return self.name
-```
-Code in main.py:
-```
-# Seed a few users in the database
-User.objects.create(name='Dan')
-User.objects.create(name='Robert')
+1. Database Population  
+   - The Product model (in db/models.py) defines three fields:  
+     - upc: Product UPC code  
+     - name: Product name  
+     - price: Product price  
+   - The populate_products() function in main.py inserts predefined product entries into the database using Django ORM.
 
-for u in User.objects.all():
-    print(f'ID: {u.id} \tUsername: {u.name}')
-```
-Output from command: ```python main.py```
-```
-ID: 1	Username: Dan
-ID: 2	Username: Robert
-```
+2. Product Scanning  
+   - The user enters a product’s UPC code in the input box.  
+   - The system searches for the product using:
+         product = Product.objects.filter(upc=entered_upc).first()
+   - If found, the program displays the product name and price.  
+   - If not found, a message such as “Product not found” appears.
 
-:mortar_board: Django Models
-----------------------------
 
-Link: [How to Use Django Models](https://docs.djangoproject.com/en/3.1/topics/db/models/)
 
-License
--------
 
-The MIT License (MIT) Copyright (c) 2024 Dan Caron
+## Setup Instructions
 
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+### Requirements
+Before running the program, make sure the following are installed:
+Python 3.x
+Django
+tkinter
 
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+### Steps to Run
+1. Since the database (db.sqlite3) and migrations are already included, no migration steps are required.  
+2. Simply run the program:
+   python main.py
+
+
+Expected behavior:
+
+Uses the pre-populated database of sample products.
+Allows scanning of products by UPC.
+Displays the product name and price if found.
+
+
+Use the following sample data for testing:
+| UPC Code     | Product Name      | Price ($) |
+| ------------ | ----------------- | --------- |
+| 123456789012 | Milk              | 2.49      |
+| 987654321098 | Bread             | 3.19      |
+| 111111111111 | Eggs              | 4.79      |
+| 222222222222 | Butter            | 5.25      |
+| 333333333333 | Cheese            | 6.49      |
+| 444444444444 | Apples (1 lb bag) | 3.99      |
+| 555555555555 | Bananas (1 lb)    | 1.59      |
+| 666666666666 | Orange Juice      | 4.29      |
+| 777777777777 | Cereal            | 5.99      |
+| 888888888888 | Toothpaste        | 2.89      |
+| 999999999999 | Soap Bar          | 1.49      |
+| 101010101010 | Shampoo           | 6.75      |
+
+
+SCREEN DUMPS 
+
+
+
+<img width="526" height="588" alt="image" src="https://github.com/user-attachments/assets/7233d747-ebde-4c47-b9da-6817f7e4f60b" />
+<img width="515" height="594" alt="image" src="https://github.com/user-attachments/assets/88c58b1d-c006-40f1-9f5b-af606be667b8" />
+<img width="520" height="594" alt="image" src="https://github.com/user-attachments/assets/0798d691-89fc-41c1-b001-04b07218483d" />
+
+
+
